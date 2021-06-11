@@ -65,6 +65,8 @@ number of times for application evaluation = no. of iteration = 4
 ```
 output takes considerably more amount of time // scales with sqrt(n)
 
+## Exercise 1.22 (also see [1.22.rkt](1.22.rkt))
+
 ```lisp
 ; prime test
 (define (prime? n) (= (smallest-divisor n) n))
@@ -100,9 +102,44 @@ output takes considerably more amount of time // scales with sqrt(n)
     (iter start_num 0 max_count))
 
 ```
-Prime starting in 1,000,000 takes:
-58ms
-Prime starting in 10,000,000 takes:
-98ms 
+Prime starting in 1,000,000,000 takes:
+1063ms
+Prime starting in 10,000,000,000 takes:
+3301ms
+diff = 3.105x
+roughly sqrt(10) = 3.16
+matches expectation
 
-most likely due to interpreter's optimizations and the use of multicore?? 
+## Exercise 1.23
+
+difference
+
+```lisp
+
+(define (smallest-divisor n) (find-divisor n 2))
+
+(define (next test-divisor) (if (= test-divisor 2) 3 (+ test-divisor 2)))
+
+(define (find-divisor n test-divisor)
+  (cond 
+    ((> (square test-divisor) n)
+     n)
+    ((divides? test-divisor n)
+     test-divisor)
+    (else
+     (find-divisor n (next test-divisor)))))
+(define (divides? a b) (= (remainder b a) 0))
+
+(define (square n) (* n n))
+
+```
+Prev Algo for 1000000000000000000:
+25143772
+Current Algo for 1000000000000000000:
+14438864
+
+42% of the time
+
+
+ideally 2x improvement since we are checking for only half of the number
+most likely due to extra procedure call adding some time 
