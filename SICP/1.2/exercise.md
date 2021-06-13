@@ -110,7 +110,7 @@ diff = 3.105x
 roughly sqrt(10) = 3.16
 matches expectation
 
-## Exercise 1.23
+## Exercise [1.23](1.23.rkt)
 
 difference
 
@@ -133,13 +133,37 @@ difference
 (define (square n) (* n n))
 
 ```
+
 Prev Algo for 1000000000000000000:
 25143772
 Current Algo for 1000000000000000000:
 14438864
 
-42% of the time
-
-
+57% of the time
 ideally 2x improvement since we are checking for only half of the number
-most likely due to extra procedure call adding some time 
+most likely due to extra procedure call adding some time  
+
+## Exercise [1.24](1.24.rkt)
+(switched pc)
+cannot test solution for 1.24 with larger numbers than ~1,000,000,000 since that'll be greater than the input size for random number generator  
+
+|Solution | 1,000 | 1,000,000,000|
+|----|----|----|
+|1.22|39|2379|
+|1.24|36|49|
+
+yes the end result is roughly matching expectation since even though we increased input size to 1,000,000 times, the time it took is only 1.36x which would be ~log(n)
+
+## Exercise [1.25](1.25.rkt)
+
+skipping for now
+
+
+## Exercise [1.26](1.26.rkt)
+
+Since scheme uses application order exercution; the eplicit multiplication requires the exp to be calculated twice before the multiplication is evaluated vs with square where the parameter is evaluated and then the multiplication is evauated.  
+
+The original growth was O(log(n)) -> with the multiplication doubling its work it becomes O(log(2^n)) -> O(nlog(2))  -> O(n)
+
+## Exerise [1.27](1.27.rkt)
+
